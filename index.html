@@ -1,0 +1,473 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tian Yao | Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+<style>
+    body {
+        font-family: 'Manrope', sans-serif;
+        background-color: #f8fafc;
+    }
+    .font-display {
+        font-family: 'Pacifico', cursive;
+    }
+    
+    .slide-in-container {
+        animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    @keyframes slideUpFade {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Custom Scrollbar for inner content */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, 0.2);
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(148, 163, 184, 0.4);
+    }
+
+    /* Glass effect utilities */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    .glass-badge {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+</style>
+</head>
+<body class="text-slate-800 antialiased h-screen w-screen overflow-hidden relative flex items-center justify-center p-4 md:p-8 selection:bg-lime-200 selection:text-slate-900">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-lime-100/70 blur-3xl mix-blend-multiply"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-emerald-50/60 blur-3xl mix-blend-multiply"></div>
+        <div class="absolute top-[20%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-slate-100/80 blur-3xl mix-blend-multiply"></div>
+    </div>
+
+    <!-- Main Card Container -->
+    <div class="relative z-10 w-full max-w-7xl h-full max-h-[900px] glass-panel shadow-xl rounded-3xl flex flex-col md:flex-row overflow-hidden slide-in-container">
+        
+        <!-- Sidebar / Profile Info -->
+        <aside class="w-full md:w-1/3 lg:w-[380px] bg-white/30 border-b md:border-b-0 md:border-r border-white/60 p-8 md:p-10 flex flex-col h-[40vh] md:h-full overflow-y-auto custom-scrollbar shrink-0">
+            
+            <div class="flex-grow flex flex-col">
+                <!-- Logo -->
+                <div class="text-xl font-semibold tracking-tighter text-slate-900 mb-12 flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-lime-500 flex items-center justify-center text-white text-xs tracking-tight">TY</div>
+                </div>
+
+                <!-- Header -->
+                <div class="mb-6">
+                    <h1 class="font-display text-4xl tracking-tight text-slate-900 mb-2 leading-tight">Tian Yao</h1>
+                    <h2 class="text-base font-medium text-lime-600 mb-6">Ph.D. Student in HCI</h2>
+                    <p class="text-sm text-slate-500 leading-relaxed font-normal">
+                        UX/UI Designer &amp; Researcher specializing in Human-Computer Interaction, inclusive design, and community-centered solutions.
+                    </p>
+                </div>
+
+                <!-- AI Chat Interface -->
+                <div class="mb-10 flex flex-col glass-badge rounded-2xl border border-white/80 overflow-hidden shadow-sm shrink-0">
+                    <!-- Chat Header -->
+                    <div class="px-4 py-3 border-b border-white/60 bg-white/40 flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></div>
+                        <span class="text-xs font-semibold text-slate-800 tracking-tight">Ask Tian's AI</span>
+                    </div>
+                    
+                    <!-- Chat Messages -->
+                    <div class="p-4 h-48 overflow-y-auto custom-scrollbar flex flex-col gap-4 text-sm bg-white/20">
+                        <!-- AI Message -->
+                        <div class="flex gap-2 items-start">
+                            <div class="w-6 h-6 rounded-full bg-lime-500 flex items-center justify-center shrink-0 shadow-sm">
+                                <span class="text-xs font-semibold text-white tracking-tighter">AI</span>
+                            </div>
+                            <div class="bg-white/80 px-3 py-2 rounded-2xl rounded-tl-sm border border-white shadow-sm text-slate-600 text-xs leading-relaxed">
+                                Hi! I'm Tian's AI assistant. Ask me anything about her portfolio.
+                            </div>
+                        </div>
+                        
+                        <!-- User Message -->
+                        <div class="flex gap-2 items-start flex-row-reverse">
+                            <div class="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center shrink-0 shadow-sm">
+                                <iconify-icon icon="solar:user-linear" stroke-width="1.5" class="text-white text-xs"></iconify-icon>
+                            </div>
+                            <div class="bg-slate-800 px-3 py-2 rounded-2xl rounded-tr-sm shadow-sm text-white text-xs leading-relaxed">
+                                What is her research focus?
+                            </div>
+                        </div>
+
+                        <!-- AI Message -->
+                        <div class="flex gap-2 items-start">
+                            <div class="w-6 h-6 rounded-full bg-lime-500 flex items-center justify-center shrink-0 shadow-sm">
+                                <span class="text-xs font-semibold text-white tracking-tighter">AI</span>
+                            </div>
+                            <div class="bg-white/80 px-3 py-2 rounded-2xl rounded-tl-sm border border-white shadow-sm text-slate-600 text-xs leading-relaxed">
+                                She specializes in HCI, inclusive design, and community-centered solutions like the CommHEAT project!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="p-2 bg-white/50 border-t border-white/60">
+                        <div class="relative flex items-center">
+                            <input type="text" placeholder="Ask a question..." class="w-full bg-white/80 border border-white shadow-sm rounded-xl pl-3 pr-10 py-2 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-lime-400/50 transition-all">
+                            <button class="absolute right-1.5 w-7 h-7 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-white transition-colors">
+                                <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="text-sm"></iconify-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="space-y-4 mb-10 text-sm font-medium text-slate-600">
+                    <a href="mailto:tyao@iastate.edu" class="flex items-center gap-3 hover:text-lime-600 transition-colors group">
+                        <div class="w-8 h-8 rounded-full glass-badge flex items-center justify-center group-hover:border-lime-200 transition-colors">
+                            <iconify-icon icon="solar:letter-linear" stroke-width="1.5" class="text-slate-400 group-hover:text-lime-500"></iconify-icon>
+                        </div>
+                        tyao@iastate.edu
+                    </a>
+                    <a href="tel:3194129322" class="flex items-center gap-3 hover:text-lime-600 transition-colors group">
+                        <div class="w-8 h-8 rounded-full glass-badge flex items-center justify-center group-hover:border-lime-200 transition-colors">
+                            <iconify-icon icon="solar:phone-linear" stroke-width="1.5" class="text-slate-400 group-hover:text-lime-500"></iconify-icon>
+                        </div>
+                        319-412-9322 (US)
+                    </a>
+                    <a href="https://tyaobbe9.myportfolio.com" target="_blank" class="flex items-center gap-3 hover:text-lime-600 transition-colors group">
+                        <div class="w-8 h-8 rounded-full glass-badge flex items-center justify-center group-hover:border-lime-200 transition-colors">
+                            <iconify-icon icon="solar:global-linear" stroke-width="1.5" class="text-slate-400 group-hover:text-lime-500"></iconify-icon>
+                        </div>
+                        Portfolio Website
+                    </a>
+                </div>
+
+                <!-- Skills Area -->
+                <div class="mt-auto">
+                    <h3 class="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-4">Core Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">UX/UI Design</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">Graphic Design</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">Prototyping</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">Usability Testing</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">Figma</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">Adobe CS</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">HTML/CSS</span>
+                        <span class="px-3 py-1.5 rounded-lg glass-badge text-xs font-medium text-slate-600">Qual &amp; Quant Research</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="w-full md:w-2/3 lg:flex-1 h-[60vh] md:h-full overflow-y-auto custom-scrollbar scroll-smooth p-8 md:p-12 lg:p-16">
+            
+            <div class="max-w-3xl space-y-24">
+                
+                <!-- Education Section -->
+                <section id="education">
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="font-display text-3xl tracking-tight text-slate-900">Education</h2>
+                        <div class="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent mt-2"></div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- Edu Item -->
+                        <div class="group relative pl-6 border-l border-slate-200/60 pb-2">
+                            <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-200 group-hover:bg-lime-400 border-2 border-[#f8fafc] transition-colors"></div>
+                            <h3 class="text-base font-semibold text-slate-800">Ph.D. in Human–Computer Interaction</h3>
+                            <div class="text-sm font-medium text-lime-600 mt-1 mb-2">Iowa State University | Expected 2026.11</div>
+                            <p class="text-sm text-slate-500 font-normal">GPA: 3.95/4.0 • Major Professor: Dr. Michael Dorneich</p>
+                        </div>
+                        
+                        <!-- Edu Item -->
+                        <div class="group relative pl-6 border-l border-slate-200/60 pb-2">
+                            <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-200 group-hover:bg-lime-400 border-2 border-[#f8fafc] transition-colors"></div>
+                            <h3 class="text-base font-semibold text-slate-800">M.A. in Experiential Graphic Design</h3>
+                            <div class="text-sm font-medium text-slate-500 mt-1 mb-2">Iowa State University | Expected 2026.05</div>
+                            <p class="text-sm text-slate-500 font-normal">Major Professor: Prof. Tina Rice</p>
+                        </div>
+
+                        <!-- Edu Item -->
+                        <div class="group relative pl-6 border-l border-slate-200/60 pb-2">
+                            <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-200 group-hover:bg-lime-400 border-2 border-[#f8fafc] transition-colors"></div>
+                            <h3 class="text-base font-semibold text-slate-800">M.S. in Industrial Design</h3>
+                            <div class="text-sm font-medium text-slate-500 mt-1 mb-2">South China University of Technology | 2017 - 2020</div>
+                            <p class="text-sm text-slate-500 font-normal">Major Professor: Dr. Wei Xiong</p>
+                        </div>
+
+                         <!-- Edu Item -->
+                         <div class="group relative pl-6 border-l border-transparent pb-0">
+                            <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-200 group-hover:bg-lime-400 border-2 border-[#f8fafc] transition-colors"></div>
+                            <h3 class="text-base font-semibold text-slate-800">B.E. in Food Quality and Safety</h3>
+                            <div class="text-sm font-medium text-slate-500 mt-1 mb-2">Qingdao Agricultural University | 2018</div>
+                            <p class="text-xs text-slate-500 font-normal mt-2 leading-relaxed">Exchange: Pittsburg State University (Graphic Design, 2015) &amp; Konkuk University, South Korea (Food Science, 2015)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Research & Work Experience Section -->
+                <section id="experience">
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="font-display text-3xl tracking-tight text-slate-900">Experience</h2>
+                        <div class="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent mt-2"></div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Exp Item -->
+                        <div class="glass-badge rounded-2xl p-6 group transition-all hover:bg-white/60">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-800">Graduate Research Assistant</h3>
+                                    <div class="text-sm font-medium text-lime-600 mt-1">Iowa State University (Dept. of HCI)</div>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400 bg-slate-100/50 px-2 py-1 rounded-md w-fit">Spring 2023 – Present</span>
+                            </div>
+                            <p class="text-sm font-medium text-slate-700 mb-2">NSF-funded project: CommHEAT – A Community-Based Indoor Heat Alert System</p>
+                            <ul class="text-sm text-slate-500 font-normal space-y-2 list-none pl-0">
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Led UX and UI design for a data-driven mobile heat alert app supporting vulnerable residents.</li>
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Conducted user research using surveys, interviews, and usability testing.</li>
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Applied inclusive design principles to ensure accessibility and collaborated with multidisciplinary teams.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Exp Item -->
+                        <div class="glass-badge rounded-2xl p-6 group transition-all hover:bg-white/60">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-800">Recruitment Graphic Designer</h3>
+                                    <div class="text-sm font-medium text-slate-500 mt-1">Iowa State University (Graphic Design Dept)</div>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400 bg-slate-100/50 px-2 py-1 rounded-md w-fit">Aug 2022 – Dec 2022</span>
+                            </div>
+                            <ul class="text-sm text-slate-500 font-normal space-y-2 list-none pl-0">
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Assisted staff designer with social media assets, designed magazines, information boards.</li>
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Maintained brand identity characteristics, typography, color conventions.</li>
+                            </ul>
+                        </div>
+
+                         <!-- Exp Item -->
+                         <div class="glass-badge rounded-2xl p-6 group transition-all hover:bg-white/60">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-800">UX/UI Designer</h3>
+                                    <div class="text-sm font-medium text-slate-500 mt-1">Shenzhen Coocaa Network Tech Co., Ltd</div>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400 bg-slate-100/50 px-2 py-1 rounded-md w-fit">Jun 2020 – Jun 2021</span>
+                            </div>
+                            <ul class="text-sm text-slate-500 font-normal space-y-2 list-none pl-0">
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Designed UI for Coocaa overseas TV system (Weather app, Screensaver, updates).</li>
+                                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-300 before:rounded-full">Created UI for GongXiangPing applets, designed logos, wrote UX/competitor analysis reports.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Exp Item compact -->
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="glass-badge rounded-2xl p-5">
+                                <h3 class="text-sm font-semibold text-slate-800 mb-1">UX Designer</h3>
+                                <div class="text-xs text-lime-600 mb-2">Netease Game | Apr - Jul 2019</div>
+                                <p class="text-xs text-slate-500 leading-relaxed">Devised game UX design (achievement, battle, story systems). Developed Unity 3D UI.</p>
+                            </div>
+                            <div class="glass-badge rounded-2xl p-5">
+                                <h3 class="text-sm font-semibold text-slate-800 mb-1">UX/UI Designer</h3>
+                                <div class="text-xs text-slate-500 mb-2">Voibook Tech | Sep 2017 - Feb 2018</div>
+                                <p class="text-xs text-slate-500 leading-relaxed">Designed UX/UI for Voibook APP (Speech recognition, modules) &amp; created marketing assets.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Teaching Section -->
+                <section id="teaching">
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="font-display text-3xl tracking-tight text-slate-900">Teaching</h2>
+                        <div class="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent mt-2"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-5 border border-white/80 bg-white/40 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-lime-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                            <h3 class="text-sm font-semibold text-slate-800">Instructor</h3>
+                            <div class="text-xs font-medium text-slate-500 mt-1 mb-3">Iowa State University | Spring 2025</div>
+                            <p class="text-xs text-slate-600 font-normal leading-relaxed relative z-10">HON-3210 Visual Storytelling in the Digital Age (Honors Seminar). Designed/taught course integrating visual communication &amp; digital storytelling.</p>
+                        </div>
+
+                        <div class="p-5 border border-white/80 bg-white/40 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-lime-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                            <h3 class="text-sm font-semibold text-slate-800">Graduate Mentor</h3>
+                            <div class="text-xs font-medium text-slate-500 mt-1 mb-3">VRAC, ISU | Summer 2024</div>
+                            <p class="text-xs text-slate-600 font-normal leading-relaxed relative z-10">SPIRE-EIT Program. Mentored 3 undergraduates in user-centered design methods and research processes.</p>
+                        </div>
+                        
+                        <div class="p-5 border border-white/80 bg-white/40 rounded-2xl relative overflow-hidden group">
+                             <div class="absolute top-0 right-0 w-16 h-16 bg-lime-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                            <h3 class="text-sm font-semibold text-slate-800">Teaching Assistant</h3>
+                            <div class="text-xs font-medium text-slate-500 mt-1 mb-3">Dept. of Graphic Design, ISU | 21-22</div>
+                            <p class="text-xs text-slate-600 font-normal leading-relaxed relative z-10">Organized 2022 Graduation Show, designed catalog (InDesign), developed exhibition website.</p>
+                        </div>
+
+                        <div class="p-5 border border-white/80 bg-white/40 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-lime-100/50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                            <h3 class="text-sm font-semibold text-slate-800">Resident Advisor</h3>
+                            <div class="text-xs font-medium text-slate-500 mt-1 mb-3">Upward Bound, ISU | Summer 2022</div>
+                            <p class="text-xs text-slate-600 font-normal leading-relaxed relative z-10">Taught life skills to first-generation students. Supervised &amp; mentored students as dorm RA.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Publications Section -->
+                <section id="publications">
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="font-display text-3xl tracking-tight text-slate-900">Selected Publications</h2>
+                        <div class="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent mt-2"></div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <article class="text-sm font-normal text-slate-600 leading-relaxed pl-4 border-l-2 border-lime-300 hover:border-lime-500 transition-colors">
+                            <strong class="text-slate-800 font-medium">Yao, T.</strong>, Dorneich, M. C., Thomas, R., et al. (2025). Evaluating User Perceptions and Usability of CommHEAT: A Community-Based Heat Alert Application. <em class="text-slate-500">Proceedings of the Human Factors and Ergonomics Society Annual Meeting</em>.
+                        </article>
+                        
+                        <article class="text-sm font-normal text-slate-600 leading-relaxed pl-4 border-l-2 border-slate-200 hover:border-lime-500 transition-colors">
+                            <strong class="text-slate-800 font-medium">Yao, T.</strong>, Dorneich, M. C., Passe, U., et al. (2024). Vulnerable Communities in the Face of Heat: A Pilot Study on Perceptions, Behaviors, and Support Networks During Heat Events. <em class="text-slate-500">Proceedings of the HFES Annual Meeting, 68(1)</em>.
+                        </article>
+
+                        <article class="text-sm font-normal text-slate-600 leading-relaxed pl-4 border-l-2 border-slate-200 hover:border-lime-500 transition-colors">
+                            <strong class="text-slate-800 font-medium">Yao, T.</strong> (2024). Bridging community history through interactive media. <em class="text-slate-500">In Chicago Designs: Teaching Community-Based Histories</em>. Art Design Chicago.
+                        </article>
+                        
+                        <article class="text-sm font-normal text-slate-600 leading-relaxed pl-4 border-l-2 border-slate-200 hover:border-lime-500 transition-colors">
+                            Xiong, W., <strong class="text-slate-800 font-medium">Yao, T.</strong>, Pan, Q., &amp; Liu, Z. (2020). Usability heuristic evaluation for the hearing impaired language training mobile app. <em class="text-slate-500">DUXU 2020 Proceedings</em>. Springer.
+                        </article>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="text-xs font-semibold tracking-wide text-slate-400 uppercase mb-3">Manuscripts in Progress</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed bg-white/30 p-4 rounded-xl border border-white/60">
+                            Currently developing multiple manuscripts focusing on climate awareness design, behavioral theory informed heat alert systems, and real-time behavioral adaptation perspectives. Planned submissions to SCIE/SSCI Q1 journals.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Additional Info Grid -->
+                <section class="grid md:grid-cols-2 gap-10">
+                    
+                    <!-- Awards & Service -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <iconify-icon icon="solar:star-fall-linear" class="text-lime-500 text-xl"></iconify-icon>
+                            <h2 class="font-display text-2xl tracking-tight text-slate-900">Awards &amp; Honors</h2>
+                        </div>
+                        <ul class="space-y-4 text-xs font-normal text-slate-600">
+                            <li class="flex gap-2"><span class="text-lime-500 shrink-0">•</span> <span><strong>2025:</strong> NCAR Extreme Heat Risk Workshop Travel Award</span></li>
+                            <li class="flex gap-2"><span class="text-lime-500 shrink-0">•</span> <span><strong>2024:</strong> ISU HCI 20th Anniversary Best Interdisciplinary Collaboration &amp; People’s Choice</span></li>
+                            <li class="flex gap-2"><span class="text-lime-500 shrink-0">•</span> <span><strong>2018:</strong> “Youth Innovation” Zhejiang Univ. Gold Award (Public Welfare)</span></li>
+                            <li class="flex gap-2"><span class="text-lime-500 shrink-0">•</span> <span><strong>2018:</strong> “Challenge Cup” Guangdong Univ. Gold Award</span></li>
+                            <li class="flex gap-2"><span class="text-lime-500 shrink-0">•</span> <span><strong>2013-18:</strong> First/Second-Class Scholarships, SCUT</span></li>
+                        </ul>
+
+                        <div class="mt-8 mb-6">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-4">Leadership</h3>
+                            <div class="space-y-3">
+                                <div class="bg-white/40 p-3 rounded-xl border border-white/50">
+                                    <div class="text-xs font-semibold text-slate-800">HFES Student Chapter</div>
+                                    <div class="text-xs text-slate-500">Communication Director (2025-Present)</div>
+                                </div>
+                                <div class="bg-white/40 p-3 rounded-xl border border-white/50">
+                                    <div class="text-xs font-semibold text-slate-800">Adaptive Cognitive Systems Lab</div>
+                                    <div class="text-xs text-slate-500">Webmaster (2023-2025)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Art & Media -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <iconify-icon icon="solar:gallery-wide-linear" class="text-lime-500 text-xl"></iconify-icon>
+                            <h2 class="font-display text-2xl tracking-tight text-slate-900">Exhibitions</h2>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="group flex items-start justify-between border-b border-slate-200/50 pb-2">
+                                <div>
+                                    <div class="text-xs font-medium text-slate-800 group-hover:text-lime-600 transition-colors">Tethered Hearts &amp; Tulip</div>
+                                    <div class="text-xs text-slate-500">In Bloom Student Exhibition</div>
+                                </div>
+                                <span class="text-xs text-slate-400">Oct '24</span>
+                            </div>
+                            <div class="group flex items-start justify-between border-b border-slate-200/50 pb-2">
+                                <div>
+                                    <div class="text-xs font-medium text-slate-800 group-hover:text-lime-600 transition-colors">Warmth Amidst the Cold</div>
+                                    <div class="text-xs text-slate-500">Contemporary Lens Photography</div>
+                                </div>
+                                <span class="text-xs text-slate-400">Aug '24</span>
+                            </div>
+                            <div class="group flex items-start justify-between border-b border-slate-200/50 pb-2">
+                                <div>
+                                    <div class="text-xs font-medium text-slate-800 group-hover:text-lime-600 transition-colors">Spectrum of Harmony</div>
+                                    <div class="text-xs text-slate-500">Effervescence Exhibition</div>
+                                </div>
+                                <span class="text-xs text-slate-400">Jun '24</span>
+                            </div>
+                            <div class="group flex items-start justify-between pb-2">
+                                <div>
+                                    <div class="text-xs font-medium text-slate-800 group-hover:text-lime-600 transition-colors">Blooming</div>
+                                    <div class="text-xs text-slate-500">Studies in Creativity</div>
+                                </div>
+                                <span class="text-xs text-slate-400">Oct '22</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <div class="flex items-center gap-2 mb-4">
+                                <iconify-icon icon="solar:radio-linear" class="text-slate-400"></iconify-icon>
+                                <h3 class="text-sm font-semibold text-slate-800">Media Mentions (2025)</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 glass-badge rounded text-xs text-slate-600">ISU News</span>
+                                <span class="px-2 py-1 glass-badge rounded text-xs text-slate-600">The Gazette</span>
+                                <span class="px-2 py-1 glass-badge rounded text-xs text-slate-600">Iowa Capitol Dispatch</span>
+                                <span class="px-2 py-1 glass-badge rounded text-xs text-slate-600">Axios</span>
+                                <span class="px-2 py-1 glass-badge rounded text-xs text-slate-600">Iowa Public Radio</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                
+                <!-- Footer padding -->
+                <div class="pt-10 pb-4 text-center">
+                    <p class="text-xs font-medium tracking-widest text-slate-400 uppercase">End of Portfolio</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+</body></html>
