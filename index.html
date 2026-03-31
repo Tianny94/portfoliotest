@@ -103,34 +103,14 @@
                     </div>
                     
                     <!-- Chat Messages -->
-                    <div class="p-4 h-48 overflow-y-auto custom-scrollbar flex flex-col gap-4 text-sm bg-white/20">
-                        <!-- AI Message -->
+                    <div id="chat-messages" class="p-4 h-48 overflow-y-auto custom-scrollbar flex flex-col gap-4 text-sm bg-white/20 scroll-smooth">
+                        <!-- Initial AI Message -->
                         <div class="flex gap-2 items-start">
                             <div class="w-6 h-6 rounded-full bg-lime-500 flex items-center justify-center shrink-0 shadow-sm">
                                 <span class="text-xs font-semibold text-white tracking-tighter">AI</span>
                             </div>
                             <div class="bg-white/80 px-3 py-2 rounded-2xl rounded-tl-sm border border-white shadow-sm text-slate-600 text-xs leading-relaxed">
-                                Hi! I'm Tian's AI assistant. Ask me anything about her portfolio.
-                            </div>
-                        </div>
-                        
-                        <!-- User Message -->
-                        <div class="flex gap-2 items-start flex-row-reverse">
-                            <div class="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center shrink-0 shadow-sm">
-                                <iconify-icon icon="solar:user-linear" stroke-width="1.5" class="text-white text-xs"></iconify-icon>
-                            </div>
-                            <div class="bg-slate-800 px-3 py-2 rounded-2xl rounded-tr-sm shadow-sm text-white text-xs leading-relaxed">
-                                What is her research focus?
-                            </div>
-                        </div>
-
-                        <!-- AI Message -->
-                        <div class="flex gap-2 items-start">
-                            <div class="w-6 h-6 rounded-full bg-lime-500 flex items-center justify-center shrink-0 shadow-sm">
-                                <span class="text-xs font-semibold text-white tracking-tighter">AI</span>
-                            </div>
-                            <div class="bg-white/80 px-3 py-2 rounded-2xl rounded-tl-sm border border-white shadow-sm text-slate-600 text-xs leading-relaxed">
-                                She specializes in HCI, inclusive design, and community-centered solutions like the CommHEAT project!
+                                Hi! I'm Tian's AI assistant. Ask me anything about her portfolio. Try asking about her "education", "experience", or "skills"!
                             </div>
                         </div>
                     </div>
@@ -138,8 +118,8 @@
                     <!-- Chat Input -->
                     <div class="p-2 bg-white/50 border-t border-white/60">
                         <div class="relative flex items-center">
-                            <input type="text" placeholder="Ask a question..." class="w-full bg-white/80 border border-white shadow-sm rounded-xl pl-3 pr-10 py-2 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-lime-400/50 transition-all">
-                            <button class="absolute right-1.5 w-7 h-7 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-white transition-colors">
+                            <input id="chat-input" type="text" placeholder="Ask a question..." class="w-full bg-white/80 border border-white shadow-sm rounded-xl pl-3 pr-10 py-2 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-lime-400/50 transition-all">
+                            <button id="chat-send-btn" class="absolute right-1.5 w-7 h-7 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-white transition-colors">
                                 <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="text-sm"></iconify-icon>
                             </button>
                         </div>
@@ -460,6 +440,34 @@
                     </div>
 
                 </section>
+
+                <!-- Interactive Game Section -->
+                <section id="game-section" class="mt-8">
+                    <div class="flex items-center gap-4 mb-8">
+                        <h2 class="font-display text-3xl tracking-tight text-slate-900">Take a Break</h2>
+                        <div class="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent mt-2"></div>
+                    </div>
+                    
+                    <div class="glass-badge rounded-2xl p-6 relative overflow-hidden flex flex-col items-center">
+                        <div class="w-full flex justify-between items-center mb-4">
+                            <span class="text-sm font-medium text-slate-700 tracking-tight">UX Runner</span>
+                            <span class="text-sm font-medium text-lime-600" id="game-score">Score: 0</span>
+                        </div>
+                        
+                        <div class="relative w-full rounded-xl overflow-hidden border border-slate-200 bg-white/40">
+                            <!-- Fixed internal resolution for consistent game physics -->
+                            <canvas id="game-canvas" width="800" height="250" class="w-full h-auto block cursor-pointer touch-none bg-slate-50/50"></canvas>
+                            
+                            <div id="game-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm z-10 transition-opacity">
+                                <p class="text-base text-slate-800 font-medium mb-3" id="game-message">Jump over the bugs!</p>
+                                <button id="start-game-btn" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded-xl transition-colors shadow-sm">
+                                    Start Game
+                                </button>
+                                <p class="text-slate-500 text-xs mt-3 tracking-wide">Press Space or Tap Canvas to Jump</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 
                 <!-- Footer padding -->
                 <div class="pt-10 pb-4 text-center">
@@ -469,5 +477,259 @@
         </main>
     </div>
 
+    <!-- Scripts for Interactive Features -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* -------------------------------------
+               AI Chat Assistant Logic
+            ------------------------------------- */
+            const chatInput = document.getElementById('chat-input');
+            const chatBtn = document.getElementById('chat-send-btn');
+            const chatMessages = document.getElementById('chat-messages');
+
+            function addChatMessage(text, isUser) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex gap-2 items-start ${isUser ? 'flex-row-reverse' : ''}`;
+                
+                const avatar = document.createElement('div');
+                avatar.className = `w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-sm ${isUser ? 'bg-slate-800' : 'bg-lime-500'}`;
+                
+                if (isUser) {
+                    avatar.innerHTML = '<iconify-icon icon="solar:user-linear" stroke-width="1.5" class="text-white text-xs"></iconify-icon>';
+                } else {
+                    avatar.innerHTML = '<span class="text-xs font-semibold text-white tracking-tighter">AI</span>';
+                }
+                
+                const bubble = document.createElement('div');
+                bubble.className = `px-3 py-2 rounded-2xl shadow-sm text-xs leading-relaxed ${isUser ? 'bg-slate-800 text-white rounded-tr-sm' : 'bg-white/80 border border-white text-slate-600 rounded-tl-sm'}`;
+                bubble.textContent = text;
+                
+                msgDiv.appendChild(avatar);
+                msgDiv.appendChild(bubble);
+                chatMessages.appendChild(msgDiv);
+                
+                // Smooth scroll to bottom
+                chatMessages.scrollTo({
+                    top: chatMessages.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+
+            function handleChatSend() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                
+                addChatMessage(text, true);
+                chatInput.value = '';
+                
+                // Simulate AI response with basic keyword matching
+                setTimeout(() => {
+                    const lowerText = text.toLowerCase();
+                    let response = "I'm a simple AI demo! Try asking me about Tian's 'education', 'experience', 'skills', or the 'game'.";
+                    
+                    if (lowerText.includes('education') || lowerText.includes('school') || lowerText.includes('phd') || lowerText.includes('study')) {
+                        response = "Tian is pursuing a Ph.D. in HCI at Iowa State University, expected to graduate in November 2026. She holds an impressive 3.95 GPA!";
+                    } else if (lowerText.includes('experience') || lowerText.includes('work') || lowerText.includes('job')) {
+                        response = "She is currently a Graduate Research Assistant working on CommHEAT, an NSF-funded project designing heat alert apps for vulnerable communities.";
+                    } else if (lowerText.includes('skill') || lowerText.includes('tool') || lowerText.includes('software')) {
+                        response = "Her core skills include UX/UI Design, Figma, Prototyping, Usability Testing, and HTML/CSS. You can see the full list in the sidebar below!";
+                    } else if (lowerText.includes('hello') || lowerText.includes('hi') || lowerText.includes('hey')) {
+                        response = "Hello there! Feel free to ask me anything about the portfolio.";
+                    } else if (lowerText.includes('game') || lowerText.includes('play') || lowerText.includes('break')) {
+                        response = "Scroll down to the bottom of the main content area to play the UX Runner game!";
+                    } else if (lowerText.includes('contact') || lowerText.includes('email') || lowerText.includes('phone')) {
+                        response = "You can reach her at tyao@iastate.edu or 319-412-9322. Check the contact section on the left!";
+                    }
+
+                    addChatMessage(response, false);
+                }, 800);
+            }
+
+            chatBtn.addEventListener('click', handleChatSend);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChatSend();
+            });
+
+            /* -------------------------------------
+               UX Runner Mini-Game Logic
+            ------------------------------------- */
+            const canvas = document.getElementById('game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('game-score');
+            const overlay = document.getElementById('game-overlay');
+            const startBtn = document.getElementById('start-game-btn');
+            const gameMsg = document.getElementById('game-message');
+
+            let animationId;
+            let score = 0;
+            let gameActive = false;
+            let frameCount = 0;
+
+            const player = {
+                x: 80,
+                y: 180,
+                width: 24,
+                height: 24,
+                vy: 0,
+                gravity: 0.55,
+                jumpPower: -11,
+                grounded: true
+            };
+
+            let obstacles = [];
+
+            function resetGame() {
+                player.y = 180;
+                player.vy = 0;
+                obstacles = [];
+                score = 0;
+                frameCount = 0;
+                scoreEl.textContent = `Score: ${score}`;
+                overlay.style.display = 'none';
+                gameActive = true;
+                
+                // Give focus to the window to prevent scrolling issue with Spacebar initially if needed
+                canvas.focus();
+                loop();
+            }
+
+            function jump() {
+                if (player.grounded && gameActive) {
+                    player.vy = player.jumpPower;
+                    player.grounded = false;
+                }
+            }
+
+            function drawPlayer() {
+                ctx.fillStyle = '#84cc16'; // lime-500
+                ctx.beginPath();
+                ctx.roundRect(player.x, player.y, player.width, player.height, 6);
+                ctx.fill();
+            }
+
+            function drawObstacles() {
+                ctx.fillStyle = '#1e293b'; // slate-800
+                obstacles.forEach(obs => {
+                    ctx.beginPath();
+                    ctx.roundRect(obs.x, obs.y, obs.width, obs.height, 4);
+                    ctx.fill();
+                    // Speed slowly increases over time
+                    obs.x -= (6 + (score / 150)); 
+                });
+                
+                // Remove off-screen obstacles to clear memory
+                obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
+            }
+
+            function checkCollisions() {
+                for (let obs of obstacles) {
+                    // Simple AABB collision detection
+                    if (
+                        player.x < obs.x + obs.width &&
+                        player.x + player.width > obs.x &&
+                        player.y < obs.y + obs.height &&
+                        player.y + player.height > obs.y
+                    ) {
+                        gameOver();
+                    }
+                }
+            }
+
+            function gameOver() {
+                gameActive = false;
+                cancelAnimationFrame(animationId);
+                overlay.style.display = 'flex';
+                gameMsg.textContent = "Game Over!";
+                
+                // Change overlay HTML to show final score and restart option
+                overlay.innerHTML = `
+                    <p class="text-slate-800 text-lg font-medium mb-1">Game Over!</p>
+                    <p class="text-lime-600 text-sm font-medium mb-4">Final Score: ${Math.floor(score/10)}</p>
+                    <button id="restart-btn" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded-xl transition-colors shadow-sm">
+                        Play Again
+                    </button>
+                    <p class="text-slate-500 text-xs mt-3 tracking-wide">Press Space to jump</p>
+                `;
+                
+                document.getElementById('restart-btn').addEventListener('click', resetGame);
+            }
+
+            function loop() {
+                if (!gameActive) return;
+                
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Apply Physics
+                player.vy += player.gravity;
+                player.y += player.vy;
+
+                // Ground collision checking
+                const groundLevel = canvas.height - 20;
+                if (player.y + player.height > groundLevel) {
+                    player.y = groundLevel - player.height;
+                    player.vy = 0;
+                    player.grounded = true;
+                }
+
+                // Draw Ground
+                ctx.beginPath();
+                ctx.moveTo(0, groundLevel);
+                ctx.lineTo(canvas.width, groundLevel);
+                ctx.strokeStyle = '#cbd5e1'; // slate-300
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Obstacle Spawning Logic
+                // Spawns randomly but guarantees enough gap for jumps
+                if (frameCount > 60 && Math.random() < 0.02 && (obstacles.length === 0 || canvas.width - obstacles[obstacles.length-1].x > 250)) {
+                    let h = 25 + Math.random() * 25;
+                    obstacles.push({
+                        x: canvas.width,
+                        y: groundLevel - h,
+                        width: 20,
+                        height: h
+                    });
+                }
+
+                drawPlayer();
+                drawObstacles();
+                checkCollisions();
+
+                if (gameActive) {
+                    score++;
+                    if (score % 10 === 0) {
+                        scoreEl.textContent = `Score: ${Math.floor(score/10)}`;
+                    }
+                    frameCount++;
+                    animationId = requestAnimationFrame(loop);
+                }
+            }
+
+            // Game Controls
+            window.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    // Prevent page scroll if game is active or if we just want to start the game
+                    if(gameActive) {
+                        e.preventDefault();
+                        jump();
+                    } else if (overlay.style.display !== 'none') {
+                        e.preventDefault();
+                        const btn = document.getElementById('start-game-btn') || document.getElementById('restart-btn');
+                        if(btn) btn.click();
+                    }
+                }
+            });
+
+            // Handle Canvas Taps/Clicks
+            canvas.addEventListener('mousedown', jump);
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                jump();
+            }, {passive: false});
+
+            startBtn.addEventListener('click', resetGame);
+        });
+    </script>
 
 </body></html>
